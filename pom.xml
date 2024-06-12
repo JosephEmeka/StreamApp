@@ -20,11 +20,11 @@
 			<artifactId>spring-context</artifactId>
 			<version>6.1.6</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>lombok</artifactId>
-			<version></version>
+			<artifactId>spring-context</artifactId>
+			<version>6.1.6</version>
 		</dependency>
 	</dependencies>
-
-</project>
+	</project>

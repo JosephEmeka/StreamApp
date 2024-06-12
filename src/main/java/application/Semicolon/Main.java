@@ -6,10 +6,12 @@ import application.sevices.MailService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfig.class);
         System.out.println("bean in context: " + Arrays.toString(context.getBeanDefinitionNames()));
@@ -22,6 +24,11 @@ public class Main {
 
         MailService mailService = context.getBean(MailService.class);
         mailService.sendMailTo("joe@example.com");
+
+        Class<? extends MailService> mailServiceClass = mailService.getClass();
+        Method declaredMethod = mailServiceClass.getDeclaredMethods()[1];
+        declaredMethod.setAccessible(true);
+        declaredMethod.invoke(mailService,  new HelloService());
     }
 
 
